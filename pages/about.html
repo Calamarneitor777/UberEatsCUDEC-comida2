@@ -86,12 +86,12 @@
   <!-- MENÚ LATERAL --> 
 
   <ul id="side-menu" class="sidenav side-menu">
-    <li><a class="subheader">UberEatsCUDEC</a></li>
-    <li><a href="/" class="waves-effect">Inicio</a></li>
-    <li><a href="pages/about.html" class="waves-effect">Acerca</a></li>
-    <li><a href="pages/pedidos.html" class="waves-effect">Pedidos</a></li>
+    <li><a class="subheader">El Tomaso</a></li>
+    <li><a href="../index.html" class="waves-effect">Inicio</a></li>
+    <li><a href="about.html" class="waves-effect">Acerca</a></li>
+    <li><a href="pedidos.html" class="waves-effect">Pedidos</a></li>
     <li><div class="divider"></div></li>
-    <li><a href="pages/contact.html" class="waves-effect">
+    <li><a href="contact.html" class="waves-effect">
       <i class="material-icons">mail_outline</i>Contacto</a></li>
 
   </ul>
@@ -267,7 +267,12 @@
   </div>
 
 
-  <script src="../js/ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menus = document.querySelectorAll('.side-menu');
+      M.Sidenav.init(menus, { edge: 'right' });
+    });
+  </script>
 
 </body>
 </html>

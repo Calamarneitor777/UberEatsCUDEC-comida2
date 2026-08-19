@@ -59,8 +59,23 @@ btnGuardarPedido.addEventListener('click', function() {
   };
 
   db.collection("pedidos").add(pedidoNuevo)
-    .then(() => {
-      alert('pedido agregado');
+    .then((docRef) => {
+      alert('Pedido agregado con ID: ' + docRef.id);
+
+      // Limpiar contenedor QR antes de generar uno nuevo
+      document.getElementById("qr").innerHTML = "";
+
+      // Generar QR con el nombre del platillo pedido
+      new QRCode(document.getElementById("qr"), {
+        text: platilloNombre,
+        width: 128,
+        height: 128,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      selectPlatillos.value = "";
       inputDireccion.value = "";
       inputUsuario.value= "";
     })
@@ -70,17 +85,11 @@ btnGuardarPedido.addEventListener('click', function() {
     });
 });
 
-function actualizarPlatillo(pedido, id){
-  let tarjeta =document.getElementById(`${id}`);
-  tarjeta.querySelector(".recipe-title").innerHTML = pedido.platillo;
-  tarjeta.querySelector(".recipe-ingredients").innerHTML = pedido.dirrecion;
-}
 
+const btnCanselar = document.getElementById('btnCanselar');
 
 btnCanselar.addEventListener('click', function() {
-    window.location.href = "/index.html"; 
-          inputDireccion.value = "";
-          inputUsuario.value = "";
+    window.location.href = "../index.html";
 });
 
 

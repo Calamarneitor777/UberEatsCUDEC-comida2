@@ -16,21 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-btnAgregarPlatillo.addEventListener('click', function() {
-
-  alert('Platillo agregado');
-
-});
-
-
-
 function mostrarPlatillo(platillo, id) {
 
   let fotoPlatillo;
 
   if (platillo.foto) {
 
-    fotoPlatillo = "data:image/png;base64," + platillo.foto;
+    fotoPlatillo = platillo.foto;
 
   } else {
 
@@ -102,9 +94,20 @@ function actualizarPlatillo(platillo, id) {
 
   if (platillo.foto) {
 
-    tarjeta.querySelector("img").src =
-      "data:image/png;base64," + platillo.foto;
+    tarjeta.querySelector("img").src = platillo.foto;
 
+  }
+
+}
+
+
+
+function borrarPlatilloDOM(id) {
+
+  const tarjeta = document.getElementById(id);
+
+  if (tarjeta) {
+    tarjeta.remove();
   }
 
 }
@@ -123,15 +126,9 @@ document.querySelector('.recipes').addEventListener('click', function(e) {
 
 
 
-  db.collection("platillos").doc(id).delete()
+  db.collection("platillo").doc(id).delete()
 
     .then(() => {
-
-      const tarjeta = document.getElementById(id);
-
-      if (tarjeta) {
-        tarjeta.remove();
-      }
 
       alert('Platillo eliminado');
 
@@ -171,6 +168,8 @@ const btntomarFoto = document.getElementById('tomarFoto');
 btnFoto.addEventListener("click", function(e) {
 
   e.preventDefault();
+
+  document.getElementById("camara").style.display = "block";
 
 
   navigator.mediaDevices
@@ -248,6 +247,8 @@ function limpiarFoto() {
 
   foto.setAttribute("src", "");
 
+  document.getElementById("fotoInput").value = "";
+
 }
 
 
@@ -284,8 +285,16 @@ function tomarFoto() {
     );
 
 
-    document.getElementById("foto").value =
+    document.getElementById("fotoInput").value =
       fotoFinal;
+
+
+    if (video.srcObject) {
+      video.srcObject.getTracks().forEach(track => track.stop());
+      video.srcObject = null;
+    }
+
+    document.getElementById("camara").style.display = "none";
 
   }
 

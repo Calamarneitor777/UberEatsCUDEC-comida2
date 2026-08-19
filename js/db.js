@@ -8,6 +8,9 @@ datos.docChanges().forEach((registro) => {
         if (registro.type ==="modified") {
             actualizarPlatillo (registro.doc.data(),registro.doc.id);
         }
+        if (registro.type === "removed") {
+            borrarPlatilloDOM(registro.doc.id);
+        }
     });
 });
 
@@ -18,7 +21,8 @@ formularioAgregar.addEventListener("submit", (e) => {
         const platilloNuevo = {
             ingredientes: formularioAgregar.ingredients.value,
             nombre: formularioAgregar.title.value,
-            precio: formularioAgregar.Precio.value
+            precio: formularioAgregar.Precio.value,
+            foto: document.getElementById("fotoInput").value
         }
 
             db.collection("platillo").add(platilloNuevo).catch((error) => {
@@ -29,5 +33,7 @@ formularioAgregar.addEventListener("submit", (e) => {
             formularioAgregar.ingredients.value ="";
             formularioAgregar.title.value = "";
             formularioAgregar.Precio.value= "";
+            document.getElementById("fotoInput").value = "";
+            document.getElementById("foto").setAttribute("src", "");
             alert("Platillo agregado");
 });

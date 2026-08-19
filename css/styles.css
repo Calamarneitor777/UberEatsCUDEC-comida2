@@ -73,3 +73,22 @@ input{
 form .input-field{
   margin-top: 30px;
 }
+
+#foto {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.side-form #foto {
+  width: 120px;
+  height: auto;
+}
+
+.logo-about {
+  max-width: 150px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
