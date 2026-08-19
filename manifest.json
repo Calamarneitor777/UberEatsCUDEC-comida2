@@ -6,7 +6,8 @@
   "display": "standalone",
   "orientation": "portrait",
   "lang": "es",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
+  "scope": "./",
   "icons": [
     {
       "src": "img/icons/icon-16x16.png",
